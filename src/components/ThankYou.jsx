@@ -69,12 +69,7 @@ const ThankYou = () => {
             <span className="text-slate-500 text-sm">Amount Paid</span>
             <span className="text-white font-bold">₹299.00</span>
           </div>
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-slate-500 text-sm">Transaction ID</span>
-            <span className="text-slate-300 font-mono text-sm">
-              TXN-{Math.floor(100000 + Math.random() * 900000)}
-            </span>
-          </div>
+          
           <div className="flex justify-between items-center">
             <span className="text-slate-500 text-sm">Status</span>
             <span className="text-green-400 text-sm font-bold flex items-center gap-1">
