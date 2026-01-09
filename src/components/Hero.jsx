@@ -14,9 +14,10 @@ const Hero = () => {
     <section
       id="home"
       // UPDATED LINE BELOW:
-      // - mobile pe 'items-start' aur 'justify-start' use kiya taaki content upar se shuru ho.
-      // - pt-[87px]: Ye 80px Navbar ka + 7px gap hai.
-      className="relative min-h-screen flex flex-col justify-start md:justify-center md:items-center pt-[87px] md:pt-20 overflow-hidden bg-black"
+      // - justify-center: Content ko beech mein rakhta hai (Tall phones ke liye perfect).
+      // - pt-[87px]: Upar se 7px gap (80px nav + 7px) fix rakhta hai.
+      // - pb-32: Niche extra padding di hai taaki content thoda UPAR shift ho jaye (Small phones ke liye perfect).
+      className="relative min-h-screen flex flex-col justify-center items-center pt-[87px] pb-32 md:py-20 overflow-hidden bg-black"
     >
       {/* Background Effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none opacity-60" />

@@ -14,7 +14,11 @@ import Reviews from "./components/Reviews";
 import FAQ from "./components/FAQ";
 import Offer from "./components/Offer";
 import Footer from "./components/Footer";
-import ThankYou from "./components/ThankYou"; // New Thank You Page
+import ThankYou from "./components/ThankYou";
+
+// --- NEW IMPORTS (Policy Pages) ---
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import RefundPolicy from "./components/RefundPolicy";
 
 // --- LANDING PAGE COMPONENT ---
 // Yeh saare purane components ko ek saath wrap karta hai
@@ -42,11 +46,15 @@ const LandingPage = () => {
 const App = () => {
   return (
     <Routes>
-      {/* Jab koi website khole (example.com/), toh Landing Page dikhao */}
+      {/* Home Page */}
       <Route path="/" element={<LandingPage />} />
 
-      {/* Jab koi example.com/thank-you par aaye, toh Thank You Page dikhao */}
+      {/* Thank You Page (After Payment) */}
       <Route path="/thank-you" element={<ThankYou />} />
+
+      {/* --- NEW ROUTES FOR POLICIES --- */}
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/refund-policy" element={<RefundPolicy />} />
     </Routes>
   );
 };
