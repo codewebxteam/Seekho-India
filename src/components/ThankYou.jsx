@@ -1,107 +1,115 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  CheckCircle,
-  Mail,
-  MessageCircle,
-  ArrowRight,
-  Download,
-} from "lucide-react";
-import { Link } from "react-router-dom"; // Agar router use kar rahe ho
+import { CheckCircle, ArrowRight, Download, Mail, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ThankYou = () => {
-  // --- META PIXEL TRACKING LOGIC ---
+  // --- COURSE ACCESS LINK ---
+  const COURSE_LINK =
+    "https://drive.google.com/drive/folders/1VUSlhW3UxEaxObHHngHYheBQyhLTrhvf";
+
+  const handleAccessCourse = () => {
+    window.open(COURSE_LINK, "_blank");
+  };
+
   useEffect(() => {
-    // Check if fbq exists (standard Meta Pixel function)
+    // Debugging Logic
+    console.log("Thank You Page Loaded");
+
     if (typeof window.fbq === "function") {
+      console.log("Firing Purchase Event to Facebook...");
       window.fbq("track", "Purchase", {
         value: 299.0,
         currency: "INR",
         content_name: "AI Filmmaking Mastery Course",
-        content_type: "product",
       });
-      console.log("Meta Purchase Event Fired! 🚀");
+    } else {
+      console.error("Facebook Pixel (fbq) not found!");
     }
   }, []);
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden p-6">
+    <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden p-6 text-center font-sans selection:bg-cyan-500/30">
       {/* Background Ambience */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-green-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none" />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-2xl w-full bg-slate-900/60 border border-slate-800 backdrop-blur-xl rounded-3xl p-8 md:p-12 text-center shadow-2xl relative z-10"
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="max-w-2xl w-full bg-slate-900/60 border border-slate-700/50 backdrop-blur-2xl rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(6,182,212,0.15)] relative z-10"
       >
-        {/* Success Icon */}
+        {/* Success Icon Animation */}
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 200,
-            damping: 10,
-            delay: 0.2,
-          }}
-          className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/50 shadow-[0_0_30px_rgba(34,197,94,0.3)]"
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+          className="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg shadow-green-500/30"
         >
-          <CheckCircle className="text-green-500 w-12 h-12" strokeWidth={3} />
+          <CheckCircle className="text-white w-12 h-12" strokeWidth={3} />
         </motion.div>
 
-        {/* Headlines */}
-        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-          Payment Successful!
+        {/* Main Headings */}
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          Welcome to the Club! 🎉
         </h1>
-        <p className="text-slate-400 text-lg mb-8">
-          Welcome to the family! You have successfully enrolled in the <br />
-          <span className="text-cyan-400 font-semibold">
-            AI Filmmaking Mastery Course
-          </span>
-          .
+        <p className="text-slate-300 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
+          Your payment was successful. You've just taken the first step towards
+          mastering{" "}
+          <span className="text-cyan-400 font-semibold">AI Filmmaking</span>.
         </p>
 
-        {/* Order Details Box */}
-        <div className="bg-black/40 border border-slate-800 rounded-xl p-6 mb-8 text-left">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-slate-500 text-sm">Amount Paid</span>
-            <span className="text-white font-bold">₹299.00</span>
+        {/* --- ACTION CARD (Important Part) --- */}
+        <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700 rounded-2xl p-6 mb-8 text-left relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <Star size={100} />
           </div>
-          
-          <div className="flex justify-between items-center">
-            <span className="text-slate-500 text-sm">Status</span>
-            <span className="text-green-400 text-sm font-bold flex items-center gap-1">
-              <CheckCircle size={12} /> Confirmed
+
+          <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+            Your Course is Ready 🚀
+          </h3>
+          <p className="text-slate-400 text-sm mb-6">
+            Click the button below to access all course videos and resources
+            immediately via Google Drive.
+          </p>
+
+          <button
+            onClick={handleAccessCourse}
+            className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold text-lg shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 cursor-pointer"
+          >
+            <Download size={20} /> Start Learning Now
+          </button>
+
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500 font-medium">
+            <Mail size={12} />
+            <span>A copy has also been sent to your email.</span>
+          </div>
+        </div>
+
+        {/* Order Details (Subtle) */}
+        <div className="border-t border-slate-800 pt-6 flex flex-wrap justify-between items-center text-sm text-slate-500">
+          <div className="flex flex-col text-left">
+            <span>Amount Paid</span>
+            <span className="text-white font-bold text-lg">₹299.00</span>
+          </div>
+          <div className="flex flex-col text-right">
+            <span>Payment Status</span>
+            <span className="text-green-400 font-bold flex items-center justify-end gap-1">
+              <CheckCircle size={14} /> Successful
             </span>
           </div>
         </div>
 
-        {/* Next Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-          <div className="p-4 rounded-2xl bg-slate-800/50 border border-slate-700 flex flex-col items-center">
-            <Mail className="text-cyan-400 mb-3" size={28} />
-            <h3 className="text-white font-semibold mb-1">Check Your Email</h3>
-            <p className="text-slate-400 text-xs">
-              Login details have been sent to your registered email.
-            </p>
-          </div>
-          <div className="p-4 rounded-2xl bg-slate-800/50 border border-slate-700 flex flex-col items-center">
-            <MessageCircle className="text-green-400 mb-3" size={28} />
-            <h3 className="text-white font-semibold mb-1">Join Community</h3>
-            <p className="text-slate-400 text-xs">
-              Connect with other filmmakers on our private WhatsApp group.
-            </p>
-          </div>
+        {/* Back to Home Link */}
+        <div className="mt-8">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-slate-500 hover:text-white transition-colors text-sm font-medium"
+          >
+            <ArrowRight size={14} className="rotate-180" /> Back to Home
+          </Link>
         </div>
-
-    
-
-        <p className="mt-8 text-xs text-slate-500">
-          Need help? Contact support at{" "}
-          <span className="text-slate-300">ask.seekhoindia@gmail.com</span>
-        </p>
       </motion.div>
     </div>
   );
