@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, Clapperboard, CheckCircle2 } from "lucide-react";
 
 const Hero = () => {
-  // PAYMENT LINK HANDLER
   const handleEnroll = () => {
     window.open(
       "https://superprofile.bio/vp/%F0%9F%8E%AC-ai-filmmaking-course--beginner-to-pro--255",
@@ -14,7 +13,10 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-black"
+      // UPDATED LINE BELOW:
+      // - mobile pe 'items-start' aur 'justify-start' use kiya taaki content upar se shuru ho.
+      // - pt-[87px]: Ye 80px Navbar ka + 7px gap hai.
+      className="relative min-h-screen flex flex-col justify-start md:justify-center md:items-center pt-[87px] md:pt-20 overflow-hidden bg-black"
     >
       {/* Background Effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none opacity-60" />
@@ -67,7 +69,6 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col items-center gap-6"
         >
-          {/* UPDATED BUTTON: Opens Payment Link */}
           <button
             onClick={handleEnroll}
             className="group relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl font-bold text-white text-lg shadow-xl shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.02] transition-all duration-300 cursor-pointer"

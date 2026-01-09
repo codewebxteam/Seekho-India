@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate, useLocation } from "react-router-dom"; // Router Hooks Imported
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,16 +10,13 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // --- NEW: PAYMENT LINK & HANDLER ---
   const PAYMENT_LINK =
     "https://superprofile.bio/vp/%F0%9F%8E%AC-ai-filmmaking-course--beginner-to-pro--255";
 
   const handleEnroll = () => {
-    window.open(PAYMENT_LINK, "_blank"); // Opens Payment Page in New Tab
+    window.open(PAYMENT_LINK, "_blank");
   };
-  // -----------------------------------
 
-  // Handle Scroll Effect for Navbar Background
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -28,7 +25,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Menu Links mapped to Component IDs
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "Overview", href: "#overview" },
@@ -38,31 +34,31 @@ const Navbar = () => {
     { name: "FAQ", href: "#faq" },
   ];
 
-  // Smart Navigation Handler
+  // --- UPDATED NAVIGATION LOGIC ---
   const handleNavClick = (e, href) => {
     e.preventDefault();
-    setIsOpen(false); // Close mobile menu
+    setIsOpen(false); // Mobile menu turant band hoga
 
-    // 1. Check if we are on the Home Page
     if (location.pathname === "/") {
-      // Smooth Scroll Logic
       const element = document.querySelector(href);
       if (element) {
-        const offset = 80; // Navbar height offset
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
+        // Thoda delay taaki menu closing animation scroll ko na roke
+        setTimeout(() => {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }, 100);
       } else if (href === "#home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } else {
-      // 2. If on Thank You page (or others), navigate to Home first
       navigate("/");
     }
   };
@@ -77,7 +73,6 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo (Router Aware) */}
           <div
             onClick={(e) => handleNavClick(e, "#home")}
             className="flex items-center gap-2 cursor-pointer group select-none"
@@ -110,7 +105,6 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button (UPDATED to Open Payment Link) */}
           <div className="hidden lg:block">
             <button
               onClick={handleEnroll}
@@ -149,7 +143,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-slate-300 hover:text-cyan-400 hover:bg-white/5 px-4 py-3 rounded-xl font-medium text-lg transition-all flex items-center justify-between group"
+                  className="text-slate-300 hover:text-cyan-400 hover:bg-white/5 px-4 py-3 rounded-xl font-medium text-lg transition-all flex items-center justify-between group cursor-pointer"
                 >
                   {link.name}
                   <ArrowRight
@@ -161,7 +155,6 @@ const Navbar = () => {
 
               <div className="h-px bg-white/10 my-2" />
 
-              {/* Mobile CTA Button (UPDATED to Open Payment Link) */}
               <button
                 onClick={handleEnroll}
                 className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold text-lg shadow-lg shadow-cyan-500/20 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
