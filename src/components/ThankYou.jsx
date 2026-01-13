@@ -18,10 +18,14 @@ const ThankYou = () => {
 
     if (typeof window.fbq === "function") {
       console.log("Firing Purchase Event to Facebook...");
+
+      // ✅ UPDATED TRACKING LOGIC (Fixes Meta Ads Errors)
       window.fbq("track", "Purchase", {
-        value: 299.0,
+        value: "299.00", // String format is safer for Meta
         currency: "INR",
         content_name: "AI Filmmaking Mastery Course",
+        content_type: "product", // Batata hai ki ye product hai
+        content_ids: ["seekho_ai_course_001"], // Unique ID for the course
       });
     } else {
       console.error("Facebook Pixel (fbq) not found!");
